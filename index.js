@@ -5,6 +5,7 @@ const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const generateHTML = require('./lib/generateHTML');
 const employeeArray = [];
 
 // Array of question objects for user input
@@ -98,36 +99,14 @@ const internQuestions = [
 
 // Function writeToFile uses built-in fs library to write the generated markdown
 // to a team.html file on the OS.
-// const writeToFile = (fileName, htmlText) => {
+const writeToFile = (fileName, htmlText) => {
 
-//     console.log("Generating README file.....");
+    console.log("Writing team HTML file.....");
 
-//     fs.writeFile(fileName, answers, (err) =>
-//         err ? console.error(err) : console.log('Success!'));
+    fs.writeFile(fileName, htmlText, (err) =>
+        err ? console.error(err) : console.log('Success!'));
 
-// }
-
-// Function generateHTML generates and returns the HTML for the team.html file
-function generateHTML() {
-
-    console.log("Hello!!!!");
-    if (employeeArray) {
-        console.log("Weve got stuff" + employeeArray.length);
-    } else {
-        console.log(employeeArray.length);
-    }
-    
-    for (let i=0; i<employeeArray.length; i++) {
-        employeeArray[i].printInfo();
-    }
-
-//     return (`# ${projectname}
-//     ## Description
-//     ${projectdesc}
-//   `);
 }
-
-
 
 
 // Function askQuestions uses the inquirer library to prompt the user for information
@@ -141,20 +120,15 @@ const askQuestions = (questions) => {
             if (employeeArray.length === 0) {
                 const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeNum);
                 employeeArray.push(manager);
-                manager.printInfo();
-                employeeArray[0].printInfo();
-                console.log(employeeArray[0].empName);
             } 
             else //Determine whether current answers are Engineer's or Intern's and create/add appropriate object to employee array
             { 
                 if (answers.github) {   // Engineer
                     const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.github);
                     employeeArray.push(engineer);
-                    engineer.printInfo();
                 } else if (answers.school) {    // Intern
                     const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.school);
                     employeeArray.push(intern);
-                    intern.printInfo();
                 }
             }    
             // Decide which questions to ask next based on type of employee manager wants to create
@@ -164,11 +138,7 @@ const askQuestions = (questions) => {
                 askQuestions(internQuestions);
             } else {
                 // No more questions, generate team.html file
-                console.log("we are done.");
-                generateHTML();
-                // //writeToFile('./dist/team.html', generateHTML(employeeArray));
-                // console.log("Employee Array: " + employeeArray);
-                process.exit();
+                writeToFile('./dist/team.html', generateHTML(employeeArray));
             }
         })
         .catch(error => {
