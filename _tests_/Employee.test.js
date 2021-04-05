@@ -3,25 +3,63 @@ const Employee = require('../lib/Employee');
 describe("Employee constructor", () => {
     describe("Initialization", () => {
 
-        it("can be an instance of the Employee Class", () => {
+        it("Should be an object instance of the Employee Class", () => {
             expect(typeof new Employee()).toBe("object");
-
         })
 
-        it("should have a name property", () => {
-            const name = "Susan";
-            const newEmployee = new Employee(id, name, email);
+        it("Should have empName, empId, and empEmail properties", () => {
+            const empName = "Susan";
+            const empId = 1;
+            const empEmail = "tester@test.com";
+            const newEmployee = new Employee(empName, empId, empEmail);
 
-            expect(newEmployee.name).toBe(name);
+            expect(newEmployee.empName).toEqual(empName);
+            expect(newEmployee.empId).toEqual(empId);
+            expect(newEmployee.empEmail).toEqual(empEmail);
         })
     })
 
     describe("getName function", () => {
-        it("should retrieve the name property's value of an instance of an employee", () => {
-            const name = "Susan";
-            const newEmployee = new Employee(id, name, email);
+        it("Should retrieve the value of the empName property of an Employee instance", () => {
+            const empName = "Susan";
+            const empId = 1;
+            const empEmail = "tester@test.com";
+            const newEmployee = new Employee(empName, empId, empEmail);
 
-            expect(newEmployee.getName()).toBe(name);
+            expect(newEmployee.getName()).toBe(empName);
+        })
+    })
+
+    describe("getId function", () => {
+        it("Should retrieve the value of the empId property of an Employee instance", () => {
+            const empName = "Susan";
+            const empId = 1;
+            const empEmail = "tester@test.com";
+            const newEmployee = new Employee(empName, empId, empEmail);
+
+            expect(newEmployee.getId()).toBe(empId);
+        })
+    })
+
+    describe("getEmail function", () => {
+        it("Should retrieve the value of the empEmail property of an Employee instance", () => {
+            const empName = "Susan";
+            const empId = 1;
+            const empEmail = "tester@test.com";
+            const newEmployee = new Employee(empName, empId, empEmail);
+
+            expect(newEmployee.getEmail()).toBe(empEmail);
+        })
+    })
+
+    describe("getRole function", () => {
+        it("Should retrieve the employee's role (Employee)", () => {
+            const empName = "Susan";
+            const empId = 1;
+            const empEmail = "tester@test.com";
+            const newEmployee = new Employee(empName, empId, empEmail);
+
+            expect(newEmployee.getRole()).toBe("Employee");
         })
     })
 })
