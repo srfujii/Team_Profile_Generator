@@ -9,7 +9,6 @@ const generateHTML = require('./lib/generateHTML');
 const employeeArray = [];
 
 // Array of question objects for user input
-// Please build your team, then newline, then questions:
 const managerQuestions = [
     {
         type: 'input',
@@ -152,6 +151,7 @@ const askQuestions = (questions) => {
         });
 }
 
+// Function init called at start of app.
 const init = () => console.log("Please build your team:\n");
 
 // Function calls to begin our app
